@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AdvancedCleanArchitecture"
 include ':app'
+include ':data'
+include ':domain'
+include ':usecase-di'

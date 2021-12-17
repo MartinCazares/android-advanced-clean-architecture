@@ -1,0 +1,17 @@
+ext {
+
+    //Variables required for DEV profile...
+    /* Martin IP: http://192.168.100.149:8080
+       Aaron IP: http://192.168.1.73:8080
+       Leo IP:
+       Isaac IP: http://192.168.100.149:8080 */
+    //devBaseUrl = "http://192.168.0.7:8080"
+    devBaseUrl = "https://catfact.ninja/"
+
+
+
+    //Variables required for PROD profile...
+    prodBaseUrl =  "https://catfact.ninja/"
+
+}
+
