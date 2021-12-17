@@ -83,4 +83,4 @@ From now on each of our modules can scale independently.
 Please don't take these concepts as absolute truth. The idea presented here is really based on the things that have worked for me in the past and in no way I'm assuming that it will work for every single project in the world. If you have any comments or would like to discuss further certain scenarios, please read the section below.
 
 ## Discussion
-If you would like to start a discussion about the implementation in this project, please let's follow up [here](https://github.com/MartinCazares/android-advanced-clean-architecture/issues)
+If you would like to start a discussion or leave a comment about the implementation in this project, please let's follow up [here](https://github.com/MartinCazares/android-advanced-clean-architecture/issues)
