@@ -85,6 +85,7 @@ From now on each of our modules can scale independently.
 # Final Notes
 Please don't take these concepts as absolute truth. Dive into the project and make your own conslusions, play with it and try to follow the whole interaction from:
 > _Application -> Activity -> Fragment -> ViewModel -> UseCase -> Repository -> DataInfo_
+
 The idea presented here is really based on the things that have worked for me in the past for simple and complex projects and in no way I'm assuming that it will work for every single project in the world. If you have any comments or would like to discuss further certain scenarios, please read the section below.
 
 ## Discussion
