@@ -1,6 +1,6 @@
 # Android Clean Architecture
 
-[Google Clean Architecture](https://android-developers.googleblog.com/2021/12/rebuilding-our-guide-to-app-architecture.html)
+[Google - Rebuilding our guide to app architecture](https://android-developers.googleblog.com/2021/12/rebuilding-our-guide-to-app-architecture.html)
 
 ### `Please Read below to get the most out of this project...`
 
