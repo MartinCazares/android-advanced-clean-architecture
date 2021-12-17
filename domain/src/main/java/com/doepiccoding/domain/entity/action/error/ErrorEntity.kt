@@ -1,4 +1,4 @@
-package com.doepiccoding.domain.entity.error
+package com.doepiccoding.domain.entity.action.error
 
 sealed interface ErrorEntity {
     data class NetworkError(val httpStatus: Int) : ErrorEntity

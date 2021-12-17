@@ -1,7 +1,7 @@
 package com.doepiccoding.domain.repository
 
-import com.doepiccoding.domain.usecase.UseCaseResult
+import com.doepiccoding.domain.entity.action.Either
 
 interface CatRepository {
-    fun getBreeds(): UseCaseResult
+    fun getBreeds(): Either
 }

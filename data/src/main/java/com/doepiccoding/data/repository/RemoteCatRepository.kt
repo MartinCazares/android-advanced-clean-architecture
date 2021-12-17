@@ -2,22 +2,22 @@ package com.doepiccoding.data.repository
 
 import com.doepiccoding.data.mapper.toCatBreed
 import com.doepiccoding.data.remote.CatRestApi
-import com.doepiccoding.domain.entity.error.ErrorEntity
+import com.doepiccoding.domain.entity.action.error.ErrorEntity
 import com.doepiccoding.domain.repository.CatRepository
-import com.doepiccoding.domain.usecase.UseCaseResult
+import com.doepiccoding.domain.entity.action.Either
 
 class RemoteCatRepository(private val api: CatRestApi): CatRepository {
 
-    override fun getBreeds(): UseCaseResult = try {
+    override fun getBreeds(): Either = try {
         val response = api.getBreeds().execute()
         if (response.isSuccessful) {
             response.body()?.let { body ->
-                UseCaseResult.Success ( body.data.map { dto -> dto.toCatBreed() } )
-            } ?: UseCaseResult.Error(ErrorEntity.EmptyResponseError)
+                Either.Success ( body.data.map { dto -> dto.toCatBreed() } )
+            } ?: Either.Error(ErrorEntity.EmptyResponseError)
         } else {
-            UseCaseResult.Error(ErrorEntity.NetworkError(response.code()))
+            Either.Error(ErrorEntity.NetworkError(response.code()))
         }
     } catch (e: Exception) {
-        UseCaseResult.Error(ErrorEntity.UnknownError(e))
+        Either.Error(ErrorEntity.UnknownError(e))
     }
 }

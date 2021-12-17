@@ -1,7 +1,7 @@
 package com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state
 
 import com.doepiccoding.domain.entity.CatBreed
-import com.doepiccoding.domain.entity.error.ErrorEntity
+import com.doepiccoding.domain.entity.action.error.ErrorEntity
 
 sealed interface BreedsScreenState {
     data class OnLoading(val isLoading: Boolean): BreedsScreenState

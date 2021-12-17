@@ -11,7 +11,7 @@ import com.doepiccoding.advancedcleanarchitecture.R
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
 import com.doepiccoding.advancedcleanarchitecture.databinding.FragmentBreedsBinding
 import com.doepiccoding.domain.entity.CatBreed
-import com.doepiccoding.domain.entity.error.ErrorEntity
+import com.doepiccoding.domain.entity.action.error.ErrorEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

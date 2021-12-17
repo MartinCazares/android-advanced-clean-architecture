@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
 import com.doepiccoding.domain.usecase.GetBreedsUseCase
-import com.doepiccoding.domain.usecase.UseCaseResult
+import com.doepiccoding.domain.entity.action.Either
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -32,10 +32,10 @@ class BreedsViewModel @Inject constructor(
                 // ==================================================================
 
                 when (val result = getBreedsUseCase()) {
-                    is UseCaseResult.Success -> {
+                    is Either.Success -> {
                         _breeds.emit(BreedsScreenState.OnBreedsLoaded(result.getData()))
                     }
-                    is UseCaseResult.Error -> {
+                    is Either.Error -> {
                         _breeds.emit(BreedsScreenState.OnError(result.error))
                     }
                 }
