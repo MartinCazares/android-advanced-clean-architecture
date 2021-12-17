@@ -79,7 +79,7 @@ In our project, the modules have the following relationship:
 Well, by having a **_(usecase-di)_** module, we can completely remove the dependency **presentation** had on **data**, because this module will basically depend on both **data** and **domain** in order to provide us with the actions _(usecases)_ required by our presentation layer. Also it helps us hide all the details of the data layer and forces us to work only with the abstractions provided by the domain module. Most of the time the _usecases_ will be injected directly into the ViewModel and with that we complete a full separation not only in the file system but also logic wise.
 From now on each of our modules can scale independently.
 
-#Final Notes
+# Final Notes
 Please don't take these concepts as absolute truth. The idea presented here is really based on the things that have worked for me in the past and in no way I'm assuming that it will work for every single project in the world. If you have any comments or would like to discuss further certain scenarios, please read the section below.
 
 ## Discussion
