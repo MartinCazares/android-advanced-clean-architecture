@@ -1,5 +1,5 @@
 # Android Clean Architecture
-### `Please Read to get the most out of this project...`
+### `Please Read below to get the most out of this project...`
 
 ### _What can you expect?_
 **In this repository you will find a sample project that sets up the ground for a Clean Architecture implementation in Android.**
