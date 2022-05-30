@@ -4,7 +4,7 @@ buildscript {
     //Default config
     ext.android_min_sdk_version = 23
     ext.android_target_sdk_version = 31
-    ext.android_build_tool_version = "29.0.3"
+    ext.android_build_tool_version = "30.0.2"
 
     //Kotlin
     ext.kotlin_version = '1.5.21'
@@ -23,7 +23,7 @@ buildscript {
     ext.espresso_core_version = '3.4.0'
 
     //Hilt
-    ext.hilt_version = '2.37'
+    ext.hilt_version = '2.40.5'
     ext.hilt_work_version = '1.0.0'
     ext.hilt_compiler_version = '1.0.0'
 

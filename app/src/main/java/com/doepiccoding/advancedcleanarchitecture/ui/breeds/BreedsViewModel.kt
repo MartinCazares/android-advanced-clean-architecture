@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
-import com.doepiccoding.domain.usecase.GetBreedsUseCase
 import com.doepiccoding.domain.entity.action.Either
+import com.doepiccoding.domain.usecase.GetBreedsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

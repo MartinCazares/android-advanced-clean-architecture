@@ -17,37 +17,25 @@ object DependenciesProvider {
 
     @Provides
     @Singleton
-    fun provideGetBreedsUseCase(): GetBreedsUseCase {
-        val retrofit = providePrivatelySingleRetrofit()
-        val catRestApi = providePrivatelySingleCatRestApi(retrofit)
+    fun provideGetBreedsUseCase(@RemoteApi catRestApi: CatRestApi): GetBreedsUseCase {
         val repository = RemoteCatRepository(catRestApi)
         return GetBreedsUseCase(repository)
     }
 
-    /**
-     * Helper methods to prevent exposing types
-     * along with other information strictly related
-     * to the "data" layer.
-     */
-    private lateinit var catRestApi: CatRestApi
-    @Synchronized
-    private fun providePrivatelySingleCatRestApi(retrofit: Retrofit): CatRestApi {
-        if (!::catRestApi.isInitialized) {
-            catRestApi = retrofit.create(CatRestApi::class.java)
-        }
-        return catRestApi
+    @Provides
+    @Singleton
+    @RemoteApi
+    fun providePrivatelySingleCatRestApi(@RemoteApi retrofit: Retrofit): CatRestApi {
+            return retrofit.create(CatRestApi::class.java)
     }
 
-    private lateinit var retrofit: Retrofit
-    @Synchronized
+    @Provides
+    @Singleton
+    @RemoteApi
     fun providePrivatelySingleRetrofit(): Retrofit {
-        if (!::retrofit.isInitialized) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
-
-        }
-        return retrofit
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
     }
 }
