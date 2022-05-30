@@ -10,9 +10,11 @@ import androidx.fragment.app.viewModels
 import com.doepiccoding.advancedcleanarchitecture.R
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
 import com.doepiccoding.advancedcleanarchitecture.databinding.FragmentBreedsBinding
+import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedNetworkErrorInterpreter
 import com.doepiccoding.domain.entity.CatBreed
 import com.doepiccoding.domain.entity.action.error.ErrorEntity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BreedsFragment : Fragment() {
@@ -20,6 +22,9 @@ class BreedsFragment : Fragment() {
     private var _binding: FragmentBreedsBinding? = null
     private val binding get() = _binding!!
     private val breedsViewModel: BreedsViewModel by viewModels()
+
+    @Inject
+    lateinit var networkErrorInterpreter: BreedNetworkErrorInterpreter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FragmentBreedsBinding.inflate(inflater, container, false).let {
@@ -30,7 +35,6 @@ class BreedsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
-        //TODO: Further setup steps depending on views being available...
     }
 
     private fun setupViewModel() {
@@ -55,9 +59,9 @@ class BreedsFragment : Fragment() {
 
     private fun getMessageFromError(error: ErrorEntity) =
         when(error) {
-            ErrorEntity.EmptyResponseError -> getString(R.string.error_no_response)
-            is ErrorEntity.NetworkError -> getString(R.string.error_http_code, error.httpStatus)
-            is ErrorEntity.UnknownError -> getString(R.string.error_unknown, error.exception.message)
+            ErrorEntity.EmptyResponseError -> getString(R.string.breeds_error_no_response)
+            is ErrorEntity.NetworkError -> networkErrorInterpreter.interpret(error.httpStatus)
+            is ErrorEntity.UnknownError -> getString(R.string.breeds_error_unknown, error.exception.message)
         }
 
     override fun onDestroyView() {

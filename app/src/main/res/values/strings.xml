@@ -5,7 +5,10 @@
     <string name="breeds_fragment_label">Breeds Fragment</string>
 
     <string name="breeds_found_number">We found %d type of breeds</string>
-    <string name="error_no_response">ERROR - Empty body response</string>
-    <string name="error_http_code">ERROR - There was a network issue, httpCode: %d</string>
-    <string name="error_unknown">"ERROR - Unknown error, message:  %s</string>
+    <string name="breeds_not_found">We found no breeds.</string>
+    <string name="breeds_error_unauthorized">You are not authorized to get breeds.</string>
+    <string name="breeds_error_no_response">ERROR - Empty body response</string>
+    <string name="breeds_error_unknown">"ERROR - Unknown error, message:  %s</string>
+
+
 </resources>
