@@ -82,8 +82,11 @@ In our project, the modules have the following relationship:
 Well, by having a **_(usecase-di)_** module, we can completely remove the dependency **presentation** had on **data**, because this module will basically depend on both **data** and **domain** in order to provide us with the actions _(usecases)_ required by our presentation layer. Also it helps us hide all the details of the data layer and forces us to work only with the abstractions provided by the domain module. Most of the time the _usecases_ will be injected directly into the ViewModel and with that we complete a full separation not only in the file's tree but also logic wise.
 From now on each of our modules can scale independently.
 
+### What about Data Source?
+With the intention of providing a very simple example of Advanced Clean Architecture I decided to use the Repository as a Local/Remote data source. However, some projects have much more complex data logic handling and hence they often require a dedicated DataSource object representation. For an example of these kind of projects, I've created a "datasource_demo" branch which basically shows the right configuration for dependencies and interaction between these objects.
+
 # Final Notes
-Please don't take these concepts as absolute truth. Dive into the project and make your own conslusions, play with it and try to follow the whole interaction from:
+Please don't take these concepts as absolute truth. Dive into the project and make your own conclusions, play with it and try to follow the whole interaction from:
 > _Application -> Activity -> Fragment -> ViewModel -> UseCase -> Repository -> DataInfo_
 
 The idea presented here is really based on the things that have worked for me in the past for simple and complex projects and in no way I'm assuming that it will work for every single project in the world. If you have any comments or would like to discuss further certain scenarios, please read the section below.
