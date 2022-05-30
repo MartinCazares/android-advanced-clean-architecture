@@ -1,14 +1,13 @@
-package com.doepiccoding.data.repository
+package com.doepiccoding.data.datasource
 
+import com.doepiccoding.data.api.CatRestApi
 import com.doepiccoding.data.mapper.toCatBreed
-import com.doepiccoding.data.remote.CatRestApi
-import com.doepiccoding.domain.entity.action.error.ErrorEntity
-import com.doepiccoding.domain.repository.CatRepository
 import com.doepiccoding.domain.entity.action.Either
+import com.doepiccoding.domain.entity.action.error.ErrorEntity
 
-class RemoteCatRepository(private val api: CatRestApi): CatRepository {
+class RemoteBreedDataSource(private val api: CatRestApi) {
 
-    override fun getBreeds(): Either = try {
+    fun getBreeds(): Either = try {
         val response = api.getBreeds().execute()
         if (response.isSuccessful) {
             response.body()?.let { body ->

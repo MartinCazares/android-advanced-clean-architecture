@@ -1,6 +1,6 @@
 package com.doepiccoding.data.mapper
 
-import com.doepiccoding.data.remote.dto.CatBreedDto
+import com.doepiccoding.data.api.dto.CatBreedDto
 import com.doepiccoding.domain.entity.CatBreed
 
 fun CatBreedDto.toCatBreed() = CatBreed(breed, country, origin, coat, pattern)

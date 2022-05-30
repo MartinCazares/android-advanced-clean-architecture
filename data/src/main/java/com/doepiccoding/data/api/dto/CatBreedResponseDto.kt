@@ -1,4 +1,4 @@
-package com.doepiccoding.data.remote.dto
+package com.doepiccoding.data.api.dto
 
 import com.squareup.moshi.Json
 

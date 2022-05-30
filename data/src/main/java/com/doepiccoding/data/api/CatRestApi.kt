@@ -1,6 +1,6 @@
-package com.doepiccoding.data.remote
+package com.doepiccoding.data.api
 
-import com.doepiccoding.data.remote.dto.CatBreedResponseDto
+import com.doepiccoding.data.api.dto.CatBreedResponseDto
 import retrofit2.Call
 import retrofit2.http.GET
 
