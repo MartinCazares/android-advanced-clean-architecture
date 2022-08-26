@@ -42,7 +42,7 @@ class BreedsFragment : Fragment() {
             when(screenState) {
                 is BreedsScreenState.OnBreedsLoaded -> handleBreedsLoaded(screenState.breeds)
                 is BreedsScreenState.OnError -> handleErrorFetchingBreeds(screenState.error)
-                is BreedsScreenState.OnLoading -> binding.progress.isVisible = screenState.isLoading
+                is BreedsScreenState.OnLoading -> showLoadingProgress(true)
             }
         }
 
@@ -51,10 +51,16 @@ class BreedsFragment : Fragment() {
 
     private fun handleBreedsLoaded(breeds: List<CatBreed>) {
         binding.resultText.text = getString(R.string.breeds_found_number, breeds.size)
+        showLoadingProgress(false)
     }
 
     private fun handleErrorFetchingBreeds(error: ErrorEntity) {
         binding.resultText.text = getMessageFromError(error)
+        showLoadingProgress(false)
+    }
+
+    private fun showLoadingProgress(show: Boolean) {
+        binding.progress.isVisible = show
     }
 
     private fun getMessageFromError(error: ErrorEntity) =

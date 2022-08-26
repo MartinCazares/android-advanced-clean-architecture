@@ -18,38 +18,31 @@ import kotlin.coroutines.CoroutineContext
 @HiltViewModel
 class BreedsViewModel @Inject constructor(
     private val getBreedsUseCase: GetBreedsUseCase,
-    private val coroutineContext: CoroutineContext): ViewModel() {
+    private val coroutineContext: CoroutineContext
+) : ViewModel() {
 
     private val _breeds = MutableLiveData<BreedsScreenState>()
     val breeds: LiveData<BreedsScreenState> = _breeds
 
     fun fetchBreeds() {
         viewModelScope.launch(coroutineContext) {
-            runWithLoadingState(_breeds) {
+            _breeds.emit(BreedsScreenState.OnLoading)
 
-                // ============ Simulate taking a bit long to fetch data ============
-                delay(1500)
-                // ==================================================================
+            // ============ Simulate taking a bit long to fetch data ============
+            delay(1500)
+            // ==================================================================
 
-                when (val result = getBreedsUseCase()) {
-                    is Either.Success -> {
-                        _breeds.emit(BreedsScreenState.OnBreedsLoaded(result.getData()))
-                    }
-                    is Either.Error -> {
-                        _breeds.emit(BreedsScreenState.OnError(result.error))
-                    }
+            when (val result = getBreedsUseCase()) {
+                is Either.Success -> {
+                    _breeds.emit(BreedsScreenState.OnBreedsLoaded(result.getData()))
+                }
+                is Either.Error -> {
+                    _breeds.emit(BreedsScreenState.OnError(result.error))
                 }
             }
         }
     }
 
-    private suspend inline fun runWithLoadingState(componentAction: MutableLiveData<BreedsScreenState>, block: () -> Unit) =
-        try {
-            componentAction.emit(BreedsScreenState.OnLoading(true))
-            block()
-        } finally {
-            componentAction.emit(BreedsScreenState.OnLoading(false))
-        }
-
-    private suspend fun <T> MutableLiveData<T>.emit(any: T) = withContext(Dispatchers.Main.immediate) { value = any }
+    private suspend fun <T> MutableLiveData<T>.emit(any: T) =
+        withContext(Dispatchers.Main.immediate) { value = any }
 }
