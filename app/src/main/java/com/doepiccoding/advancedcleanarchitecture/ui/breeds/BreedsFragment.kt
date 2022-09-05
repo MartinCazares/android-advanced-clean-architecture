@@ -24,7 +24,9 @@ class BreedsFragment : Fragment() {
     private var _binding: FragmentBreedsBinding? = null
     private val binding get() = _binding!!
     private val breedsViewModel: BreedsViewModel by viewModels()
-    private val catsListView = CatsListView()
+
+    @Inject
+    lateinit var catsListView: CatsListView
 
     @Inject
     lateinit var networkErrorInterpreter: BreedNetworkErrorInterpreter

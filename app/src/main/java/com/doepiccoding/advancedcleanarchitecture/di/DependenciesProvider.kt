@@ -1,6 +1,7 @@
 package com.doepiccoding.advancedcleanarchitecture.di
 
 import android.content.Context
+import com.doepiccoding.advancedcleanarchitecture.ui.breeds.compose.CatsListView
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedNetworkErrorInterpreter
 import dagger.Module
 import dagger.Provides
@@ -25,5 +26,9 @@ object DependenciesProvider {
     fun provideBreedNetworkErrorInterpreter(@ApplicationContext context: Context): BreedNetworkErrorInterpreter {
         return BreedNetworkErrorInterpreter(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideCatListView(): CatsListView = CatsListView()
 
 }
