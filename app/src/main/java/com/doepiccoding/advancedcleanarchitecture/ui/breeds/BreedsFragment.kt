@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.doepiccoding.advancedcleanarchitecture.R
-import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
 import com.doepiccoding.advancedcleanarchitecture.databinding.FragmentBreedsBinding
+import com.doepiccoding.advancedcleanarchitecture.ui.breeds.compose.CatsListView
 import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedNetworkErrorInterpreter
+import com.doepiccoding.advancedcleanarchitecture.ui.breeds.screen_state.BreedsScreenState
 import com.doepiccoding.domain.entity.CatBreed
 import com.doepiccoding.domain.entity.action.error.ErrorEntity
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,13 +24,27 @@ class BreedsFragment : Fragment() {
     private var _binding: FragmentBreedsBinding? = null
     private val binding get() = _binding!!
     private val breedsViewModel: BreedsViewModel by viewModels()
+    private val catsListView = CatsListView()
 
     @Inject
     lateinit var networkErrorInterpreter: BreedNetworkErrorInterpreter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
         FragmentBreedsBinding.inflate(inflater, container, false).let {
             _binding = it
+            binding.composeView.apply {
+                // Dispose of the Composition when the view's LifecycleOwner
+                // is destroyed
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent {
+                    // In Compose world
+                    catsListView.RenderView()
+                }
+            }
             it.root
         }
 
@@ -39,7 +55,7 @@ class BreedsFragment : Fragment() {
 
     private fun setupViewModel() {
         breedsViewModel.breeds.observe(viewLifecycleOwner) { screenState ->
-            when(screenState) {
+            when (screenState) {
                 is BreedsScreenState.OnBreedsLoaded -> handleBreedsLoaded(screenState.breeds)
                 is BreedsScreenState.OnError -> handleErrorFetchingBreeds(screenState.error)
                 is BreedsScreenState.OnLoading -> showLoadingProgress(true)
@@ -51,6 +67,7 @@ class BreedsFragment : Fragment() {
 
     private fun handleBreedsLoaded(breeds: List<CatBreed>) {
         binding.resultText.text = getString(R.string.breeds_found_number, breeds.size)
+        catsListView.data.addAll(breeds)
         showLoadingProgress(false)
     }
 
@@ -64,10 +81,13 @@ class BreedsFragment : Fragment() {
     }
 
     private fun getMessageFromError(error: ErrorEntity) =
-        when(error) {
+        when (error) {
             ErrorEntity.EmptyResponseError -> getString(R.string.breeds_error_no_response)
             is ErrorEntity.NetworkError -> networkErrorInterpreter.interpret(error.httpStatus)
-            is ErrorEntity.UnknownError -> getString(R.string.breeds_error_unknown, error.exception.message)
+            is ErrorEntity.UnknownError -> getString(
+                R.string.breeds_error_unknown,
+                error.exception.message
+            )
         }
 
     override fun onDestroyView() {

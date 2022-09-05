@@ -4,7 +4,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="breeds_fragment_label">Breeds Fragment</string>
 
-    <string name="breeds_found_number">We found %d type of breeds.</string>
+    <string name="breeds_found_number">Found %d type of breeds.</string>
     <string name="breeds_not_found">We found no breeds.</string>
     <string name="breeds_error_unauthorized">You are not authorized to get breeds.</string>
     <string name="breeds_error_no_response">ERROR - Empty body response</string>

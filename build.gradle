@@ -30,6 +30,9 @@ buildscript {
     //Moshi
     ext.moshi_version = '2.4.0'
 
+    //Compose
+    ext.compose_version = '1.0.1'
+
     repositories {
         google()
         mavenCentral()
